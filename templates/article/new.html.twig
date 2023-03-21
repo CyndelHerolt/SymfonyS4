@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DefaultController!{% endblock %}
+
+{% block body %}
+    <h1>Formulaire Article</h1>
+
+    {{ form_start(form) }}
+    {#    {{ form_widget(form) }} #}
+    <div class="row">
+        <div class="col-6">
+            {{ form_row(form.designation) }}
+            {{ form_row(form.description) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(form.prix) }}
+            {{ form_row(form.quantiteDisponible) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(form.fournisseur) }}
+        </div>
+        <div class="col-6">
+            {#            {{ form_row(form.tags) }} #}
+
+            <ul class="tags"
+                data-index="{{ form.tags|length > 0 ? form.tags|last.vars.name + 1 : 0 }}"
+                data-prototype="{{ form_widget(form.tags.vars.prototype)|e('html_attr') }}"
+            >
+                <div data-gb-custom-block data-tag="for">
+
+                    <li>{{ form_row(form.tags) }}</li>
+
+                    <button type="button" class="add_item_link" data-collection-holder-class="tags">Add a tag</button>
+                </div>
+
+            </ul>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    {{ form_end(form) }}
+
+    <h2>Articles dont le prix est supérieur à 10</h2>
+
+    {% for articleByPrice in articlesByPrice %}
+        {{ articleByPrice.designation }}
+        {{ articleByPrice.prix }}
+        {{ articleByPrice.quantiteDisponible }}
+        <br>
+    {% endfor %}
+
+    <h2>Articles dont le prix est supérieur à 10 et dont le nom est 'hello'</h2>
+
+    {% for articleByPriceAndName in articlesByPriceAndName %}
+        {{ articleByPriceAndName.designation }}
+        {{ articleByPriceAndName.description }}
+        {{ articleByPriceAndName.prix }}
+        {{ articleByPriceAndName.quantiteDisponible }}
+        <br>
+    {% endfor %}
+
+    <h2>Articles dont le prix est supérieur à 10, dont le nom est 'hello' et dont le cp du fournisseur est 12345</h2>
+
+    {% for articleByPriceNameAndCp in articlesByPriceNameAndCp %}
+        {{ articleByPriceNameAndCp.designation }}
+        {{ articleByPriceNameAndCp.description }}
+        {{ articleByPriceNameAndCp.prix }}
+        {{ articleByPriceNameAndCp.quantiteDisponible }}
+        <br>
+    {% endfor %}
+
+    <script>
+        document.querySelectorAll('.tags').forEach((event) => {
+            console.log(event);
+            event.parentNode.classList.add('soft_skills_div')
+            event.parentNode.classList.add('input-group', 'mb-3', 'soft_skills_div')
+            event.style.display = 'flex';
+            event.style.alignItems = 'flex-end';
+            // pour chaque bloc existant, on ajoute les boutons pour manipuler le form
+            event.parentNode.innerHTML += (
+                '<button type="button" class="btn btn-danger delete-soft-skill">' +
+                '<i class="fa-solid fa-square-minus"></i>' +
+                '</button>'
+            )
+        })
+    </script>
+{% endblock %}
+

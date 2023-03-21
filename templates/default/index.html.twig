@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DefaultController!{% endblock %}
+
+{% block body %}
+    <h1>Internationalisation</h1>
+    <h2>{{ bienvenue }}</h2>
+    <p>{{ translated }}</p>
+    {% if app.request.locale == 'fr' %}
+        <a href="{{ path('app', {'_locale': 'en'}) }}">
+            <button>{{ switch }} {{ en }}</button>
+        </a>
+        <a href="{{ path('app', {'_locale': 'de'}) }}">
+            <button>{{ switch }} {{ de }}</button>
+        </a>
+    {% elseif app.request.locale == 'en' %}
+        <a href="{{ path('app', {'_locale': 'fr'}) }}">
+            <button>{{ switch }} {{ fr }}</button>
+        </a>
+        <a href="{{ path('app', {'_locale': 'de'}) }}">
+            <button>{{ switch }} {{ de }}</button>
+        </a>
+    {% elseif app.request.locale == 'de' %}
+        <a href="{{ path('app', {'_locale': 'fr'}) }}">
+            <button>{{ switch }} {{ fr }}</button>
+        </a>
+        <a href="{{ path('app', {'_locale': 'en'}) }}">
+            <button>{{ switch }} {{ en }}</button>
+        </a>
+    {% endif %}
+
+{% endblock %}

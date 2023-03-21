@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DefaultController!{% endblock %}
+
+{% block body %}
+    <h1>Formulaire Adresse</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+    {{ form_end(form) }}
+
+    <h2>Adresses dont le cp est 12345</h2>
+
+    {% for adresseByCp in adressesByCp %}
+    {{ adresseByCp.adresse1 }}
+    {{ adresseByCp.adresse2 }}
+    {{ adresseByCp.codePostal }}
+    {{ adresseByCp.ville }}
+        <br>
+    {% endfor %}
+
+    <hr>
+
+    <h2>Adresses dont le cp est 12345 triées par rues</h2>
+
+    {% for adresseByCpSort in adressesByCpSort %}
+    {{ adresseByCpSort.adresse1 }}
+    {{ adresseByCpSort.adresse2 }}
+    {{ adresseByCpSort.codePostal }}
+    {{ adresseByCpSort.ville }}
+        <br>
+    {% endfor %}
+{% endblock %}

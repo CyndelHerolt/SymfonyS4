@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    <h2>{{ 'now'|dateFR }}</h2>
+
+    <h3>{{ '0606060606'|formatPhone }}</h3>
+
+    <a href="{{ path('app_article_new') }}"><button class="btn btn-primary">Créer un nouvel article</button></a>
+
+{% endblock %}
